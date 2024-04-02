@@ -1,0 +1,280 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>넷플릭스 영화 공유 웹 애플리케이션</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- jQuery (Bootstrap의 JavaScript 플러그인을 위해 필요) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Bootstrap Bundle JS (Popper.js 포함) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img
+            src="data:image/png;base64,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"
+            alt="로고"
+            height="40"
+          />
+          넷플 뭐봄?</a
+        >
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <input
+                type="search"
+                class="form-control mr-sm-2"
+                placeholder="검색"
+              />
+            </li>
+            <li class="nav-item">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                id="loginButton"
+              >
+                로그인
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mt-4">
+      <div class="row">
+        <!-- 게시글 카드 -->
+        <div class="col-md-8">
+          <!-- 카드 반복 -->
+          <div class="card mb-3" style="width: 100%">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img
+                  src="data:image/png;base64,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"
+                  class="card-img"
+                  alt="영화 이미지"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">영화 제목</h5>
+                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
+                  <p class="card-text">
+                    <small class="text-muted">작성자</small>
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">좋아요 0개</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 카드 몇개할지 반복 -->
+          <div class="card mb-3" style="width: 100%">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img
+                  src="data:image/png;base64,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"
+                  class="card-img"
+                  alt="영화 이미지"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">영화 제목</h5>
+                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
+                  <p class="card-text">
+                    <small class="text-muted">작성자</small>
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">좋아요 0개</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3" style="width: 100%">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img
+                  src="data:image/png;base64,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"
+                  class="card-img"
+                  alt="영화 이미지"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">영화 제목</h5>
+                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
+                  <p class="card-text">
+                    <small class="text-muted">작성자</small>
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">좋아요 0개</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3" style="width: 100%">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAhFBMVEUiHx+vDBniEiHjEiKyCxkVIB8bIB96FRtEHB4gHx+pDBgQIB+2ChnnESJxFxwAIB8vHR+TCBWKBxSaCRZ/BRKiDBhnFhvsESJfFRorHR4KIB95BBHZECCVGSFKHR/IFCFaHB/RFCGdGCCEGiCuFyFQFBlyBBGmFyFVHSDBFSGMGR85Hh/R0WpaAAAGX0lEQVR4nO2ci26rOBCGAQMpJBOCjetcnFDa7Gl7+v7vtzb4RlKtjs5uPDpapheqKlU/zT/+PbYhSbLEEkssscQSSyyxxP86qm/jd1/2HzF9/+vyjqn8Lh4EtT4LuA+xXd+8bLXJ72Pz9BisYgsk00H0hYwfGYG0uYHabtL7yB8GJTWFxTKAmbz5d5GhVhuVKkImGp2o8SdYzfWLDZXKbMoQMUj6Cz7XsyEQG6oeTCWZ0hpFJOKACpXWgjgeYpMmzrNSj15TrUPxhZWRvghTFRsq5xvIXEx8Gu+lwISqOSHWFIgBU6V+PmJCpa10hU5cykA2gX7xoZjWj7iSMnDiEugXH6qmwta3r/ZM8GD8xYdKqSRhjoxBDDuvHwIUq8FNNJkv9q3XDwGKt4F8TkC4ev0QoGo6EJchYucaAt4/MaDaWmSBndvx51s9BKiUdWJe6mPa4NPphwHFaQ9+7LmpRl7sP8WAqltOfKLcOIQ3qx8KFKMyzJK5Qm/1Q4HiXU9C5zRlJQ4lHpTSrxW+ITYdg0qVbfWQoE6m8ZxRkd6sgnGgGM3B6hbW1kuJB6VmGgbWzIldSRAiXhsDlSNA1axzrR4hvtolMlQOJHBOo5+YWnUkKE47cdsS6/F3PWJCtScJM6hpVTq1ejhQyhQod0stU+xjqY+t3nr7DVMEKEbpbJYxl6nVU5mqMaCUfgNxnu6XNlAq/dbPKQqUGn9cWEdwrq6gtqrUCxword/Jznnh0hQ2KlUa6p4qAhRvO93qmUQ5AyXyoqFqNCie2TmGEOek4u2ICMVoJzODFSz/YGjwoGrWnj7BzjHOF5RVPZXFM+f3VDGgeEupuHUEMu4KFXscKKNf0H0SMxihP6z3jN8LGANK6dfZXT1f5/rzpdkzdp+qWFCtd05fVYKhQWlToCfpt2N9YywxoZSppyLIlDmsIbB/adt7qkhQLe3Ae8JkorrU3/9Cg6o11ADuAInYSQeGPUWD0qbAnX3ajWxNRbtvqGJBqVSFDbFtQWH4gQQ16XcaIBx8xkOBKiiGA6VS1THhpbP5yqD+Rr8oUGb8eYvy3QIZkKH64ADJVxVFgxrHH/ObsX53HfITbdGgWt+q2x3skUqe7lIVFSoH1yA4/8yAdRQFyoy/FsIez6QMNlOpI0GpqcZ16O5KiESGMgeARkGTNqFSiAI1duqqVYfg9M+uH6C/HX8RoVSqfgzErgDd2Zb6rvXDg+pWYr5MHgP4zfiLCKWpLvLGPEeovpvrFwvKpCpJ7Qa280/tpjf6xYVqy1XQKrjNdcHn4y8aVDrqdyj8qPNLLaJaPSQonapDcxWZ33xxfFQXFRIUU+t08K2CXcFnpO7CoooJpagO1W6wc7HdUhhXNV2oX1wofqiO77bV82tAtYCf6RcPKp2gig8xN89pAzQ/BU4VFapWUEkjnU0Rf1GtHsOASg3UWTiLChRsA/3iQtW7Kik/winGzjmq1UODUpmqks/wjM2ZqNYPASodM5UcfwpiDdSblWixoFINVR7GXdngVGQk609OPwSopBlgtqNgllodDlSampNHEVqCcXeonX4YUNXFH0D45alq9axToUCtr3ZXKKwscPrFhcqnewS1fuF++kQlaooJVR0D6/SrmqFjiFBJc4VglnFNe9tyRKhy7zIU9OoipQwRSrd6duclOByRRj8cqKR5Fa5H9+dbgraYUMXF32vi5kDVKlCOCKWnGufqrraIRIY6w0w/kzA2FhUWVPkhZ34wsSn9MKGqop+1eeYKHUeESpo3Md/SG78LxjChqgSCezpccfVaPzSopNH3KvibOkzIFhWqWPlTEd8cQ80xocon6WY+PwxhoJhQY6tw4wnjVFNjQq33wlW6P7GBnGNCVUdJ/LgzVUWygWFCJcerCJ5oczqiZiopnt0dOf6uANUq1JhQ1WFw6yzffxLJHvbI7y9AqVYPfFNsl/IZcMxMKasSwRLLqdjXmFDVug82QF27J+Nkyj0fPocKHzYnfnOdPLSmFMVmk483ALyef65W2+38gd+k+nr7+fr6fk0/+2GQGQghFB0MXw97ujav2Xn1/HJ5+toddFen4/bNAaqjinVRVofd1+Vjv317/+wzAQ+Cqr6+iqZpjkVZ/sJ7IEyvKIv1Uf1NU1x2//jqf0H1+2/FUJWPeheHJZZYYoklllhiiSX+kPgb7x2HIdyzWYQAAAAASUVORK5CYII="
+                  class="card-img"
+                  alt="영화 이미지"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">영화 제목</h5>
+                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
+                  <p class="card-text">
+                    <small class="text-muted">작성자</small>
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">좋아요 0개</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 사이드바 '넷플릭스 영화 TOP 10' 부분 -->
+        <div class="col-md-4">
+          <!-- 카테고리 -->
+          <div class="card">
+            <div class="card-header">카테고리</div>
+            <ul class="list-group list-group-flush">
+              <a href="#" class="list-group-item list-group-item-action"
+                >영화</a
+              >
+              <a href="#" class="list-group-item list-group-item-action"
+                >드라마</a
+              >
+              <!-- 다른 카테고리 항목들 추가 -->
+            </ul>
+          </div>
+          <!-- 넷플릭스 영화 TOP 10 -->
+          <div class="card">
+            <div class="card-header">넷플릭스 영화 TOP 10</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">영화1</li>
+              <li class="list-group-item">영화2</li>
+              <li class="list-group-item">영화3</li>
+              <li class="list-group-item">영화4</li>
+              <li class="list-group-item">영화5</li>
+              <li class="list-group-item">영화6</li>
+              <li class="list-group-item">영화7</li>
+              <li class="list-group-item">영화8</li>
+              <li class="list-group-item">영화9</li>
+              <li class="list-group-item">영화10</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 글쓰기 버튼 -->
+        <div class="wbutton">
+          <button class="btn btn-primary btn-block" id="writeButton">
+            글쓰기
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer">
+      <div class="container py-4">
+        <div class="copyright">
+          © Copyright <strong><span>team13</span></strong
+          >. All Rights Reserved
+          <div>일찍끝내조</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 로그인 모달 -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div
+              class="d-flex-column justify-content-center align-items-center w-100 custom-container"
+            >
+              <div class="text-center logo">
+                <img
+                  src="NFMB.png"
+                  alt="로고"
+                  style="height: 50px; width: auto"
+                />
+              </div>
+              <div class="text-center login-modal-title">
+                <h5 class="modal-title" id="loginModalLabel">로그인하기</h5>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="닫기"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- 로그인 폼 -->
+            <form>
+              <div class="form-group">
+                <label for="username">사용자 이름</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="사용자 이름 입력"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="비밀번호 입력"
+                />
+              </div>
+              <div class="twobuttons">
+                <button type="submit" class="btn btn-primary">로그인</button>
+                <button type="submit" class="btn btn-primary">회원가입</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
