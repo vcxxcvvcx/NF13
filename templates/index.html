@@ -106,6 +106,36 @@
             </div>
           </div>
           {% endfor %}
+          <div class="pagination-wrapper text-center">
+            <div class="pagination">
+                {% if posts.has_prev %}
+                    <a href="{{ url_for('index', page=posts.prev_num) }}">이전</a>
+                {% else %}
+                    <span class="disabled">이전</span>
+                    &nbsp; <!-- 공백 추가 -->
+                {% endif %}
+                
+                {% for num in posts.iter_pages() %}
+                    {% if num %}
+                        {% if num != posts.page %}
+                            <a href="{{ url_for('index', page=num) }}">{{ num }}</a>
+                        {% else %}
+                            <span class="current">{{ num }}</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="ellipsis">...</span>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                    &nbsp; <!-- 공백 추가 -->
+                    <a href="{{ url_for('index', page=posts.next_num) }}">다음</a>
+                {% else %}
+                    <span class="disabled">다음</span>
+                {% endif %}
+            </div>
+        </div>
+        </div>
         </div>
           <!-- 카드 몇개할지 반복 -->
           <!-- <div class="card mb-3" style="width: 100%">
@@ -186,12 +216,9 @@
           <div class="card">
             <div class="card-header">카테고리</div>
             <ul class="list-group list-group-flush">
-              <a href="#" class="list-group-item list-group-item-action"
-                >영화</a
-              >
-              <a href="#" class="list-group-item list-group-item-action"
-                >드라마</a
-              >
+              <a href="{{ url_for('index') }}" class="list-group-item list-group-item-action">전체</a> <!-- 전체 카테고리 -->
+              <a href="{{ url_for('category', category='영화') }}" class="list-group-item list-group-item-action">영화</a>
+              <a href="{{ url_for('category', category='드라마') }}" class="list-group-item list-group-item-action">드라마</a>
               <!-- 다른 카테고리 항목들 추가 -->
             </ul>
           </div>
@@ -336,5 +363,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </body>
 </html>
