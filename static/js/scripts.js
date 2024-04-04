@@ -185,3 +185,54 @@ function increaseLikes(postId) {
       console.error('Error:', error);
   });
 }
+
+// 댓글 자바스크립트
+function openEditModal(username, contents, commentId) {
+  document.getElementById('comment_username').value = username;
+  document.getElementById('comment_contents').value = contents;
+  document.getElementById('comment_id').value = commentId;
+  document.querySelector('#edit-comment-form').action = `/comments/${commentId}/edit`;
+}
+
+function deleteComment(formId) {
+  const form = document.getElementById(formId);
+  form.submit();
+}
+
+function submitEditForm() {
+  const form = document.getElementById('edit-comment-form');
+  const commentId = form.querySelector('input[name="comment_id"]').value;
+  const newUsername = form.querySelector('input[name="new_username"]').value;
+  const newContents = form.querySelector('input[name="new_contents"]').value;
+
+  // Send a POST request to the server with the updated data
+  fetch(`/comments/${commentId}/edit`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ newUsername: newUsername, newContents: newContents }),
+  })
+    .then(response => {
+      // Handle the response as needed
+      if (response.ok) {
+        // Reload the page to reflect the changes
+        window.location.reload();
+      } else {
+        // Handle errors
+        console.error('Failed to update comment');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+document.querySelectorAll('.edit-btn').forEach(button => {
+  button.addEventListener('click', function () {
+    const username = this.getAttribute('data-username');
+    const contents = this.getAttribute('data-contents');
+    const commentId = this.getAttribute('data-comment-id');
+    openEditModal(username, contents, commentId);
+  });
+});
