@@ -1,0 +1,106 @@
+/* style.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 */
+.navbar-brand {
+  font-size: 28px;
+  font-weight: bold;
+}
+.nav-item {
+  margin-right: 10px; /* 검색과 로그인 사이에 오른쪽 여백 추가 */
+}
+.navbar-brand img {
+  margin-bottom: 10px;
+}
+
+/* 메인 */
+main {
+  flex: 1 0 auto;
+}
+
+.card {
+  margin-bottom: 20px; /* 카드 아래 여백 설정 */
+}
+
+.card-header {
+  margin-bottom: 10px; /* 카드 헤더 아래 여백 설정 */
+}
+/* 고정된 사이드바 스타일 */
+.fixed-sidebar {
+  position: fixed;
+  top: 80px; /* 화면 상단에서의 위치 */
+  right: 0; /* 화면 오른쪽 끝에서의 위치 */
+  width: 300px; /* 사이드바의 너비 */
+  height: 100%; /* 전체 화면 높이 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
+}
+
+/* 컨텐츠 영역에 여백 추가 */
+.content-area {
+  margin-right: 320px; /* 사이드바 너비 + 여백 */
+}
+
+.wbutton {
+  position: fixed;
+  right: 40px;
+  bottom: 60px;
+}
+/* 푸터 */
+#footer {
+  background: #fff;
+  padding: 0 0 30px 0;
+  color: #444444;
+  font-size: 14px;
+  background: #f1f6fe;
+}
+
+#footer .copyright {
+  text-align: center;
+  float: left;
+}
+/* 로그인창 */
+.custom-container {
+  margin-bottom: 20px;
+}
+.logo {
+  margin-top: 25px;
+}
+.login-modal-title {
+  font-size: 35px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.twobuttons {
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+/* 글쓰기 페이지 */
+.writeform {
+  margin: 30px auto;
+}
+
+.Wtitle {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .nav-item {
+    margin-right: 5px; /* 모바일 기기에서의 여백 조정 */
+  }
+}

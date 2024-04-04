@@ -1,0 +1,253 @@
+<!-- post_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>넷플릭스 영화 공유 웹 애플리케이션</title>
+    <!--파비콘추가하였음-->
+    <link rel="icon" type="image/png" href="data:image/png;base64,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"/>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- jQuery (Bootstrap의 JavaScript 플러그인을 위해 필요) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Bootstrap Bundle JS (Popper.js 포함) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <!--원래로고주소src="data:image/png;base64,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"-->
+    <header class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+          <img
+            src="/static/NFMB.png"
+            alt="로고"
+            height="40"
+          />
+          넷플 뭐봄?</a
+        >
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <input
+                type="search"
+                class="form-control mr-sm-2"
+                placeholder="검색"
+              />
+            </li>
+            <li class="nav-item">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                id="loginButton"
+              >
+                로그인
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 메인 -->
+
+    <main class="writeform">
+      <h2 class="Wtitle">글쓰기</h2>
+      <form onsubmit="submitPost(event)">
+        <div class="form-group">
+          <label for="titleInput">제목 : {{ post.title }}</label>
+          <!-- <input
+            type="text"
+            class="form-control"
+            id="titleInput"
+            placeholder="제목 입력"
+          /> -->
+        </div>
+        <div class="form-group">
+          <label for="authorInput">작성자 : {{ post.author }}</label>
+          <!-- <input
+            type="text"
+            class="form-control"
+            id="authorInput"
+            placeholder="작성자 이름"
+          /> -->
+        </div>
+        <div class="form-group">
+          <label for="imageUpload">{{ post.image_url }}          <!-- <input type="file" class="form-control-file" id="imageUpload" /> -->
+        </div>
+        <div class="form-group">
+          <label for="categorySelect"> 카테고리: {{ post.category }}</label>
+          
+          <!-- <select class="form-control" id="categorySelect">
+            <option>영화</option>
+            <option>드라마</option> -->
+
+            <!-- 추가 카테고리 옵션 -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contentTextarea">{{ post.content }}</label>
+          <!-- <textarea
+            class="form-control"
+            id="contentTextarea"
+            rows="5"
+            placeholder="내용 입력"
+          ></textarea> -->
+        </div>
+        <!-- 수정 버튼 -->
+<!--<button type="button" class="btn btn-primary" onclick="updatePost({{ post.id }})">수정</button>-->
+<!-- 수정 버튼 -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPostModal">수정</button>
+<!-- 삭제 버튼 -->
+<button type="button" class="btn btn-danger" onclick="deletePost({{ post.id }})">삭제</button>
+<!--삭제버튼-->
+<a href="{{ url_for('index') }}" class="btn btn-secondary">뒤로</a>
+
+      </form>
+    </main>
+
+    <!-- 푸터 -->
+    <footer id="footer">
+      <div class="container py-4">
+        <div class="copyright">
+          © Copyright <strong><span>team13</span></strong
+          >. All Rights Reserved
+          <div>일찍끝내조</div>
+        </div>
+      </div>
+    </footer>
+
+    
+
+
+<!-- 수정 폼 모달 -->
+<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPostModalLabel">게시글 수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/posts/{{ post.id }}/update" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}">
+          </div>
+          <div class="form-group">
+            <label for="author">작성자</label>
+            <input type="text" class="form-control" id="author" name="author" value="{{ post.author }}">
+          </div>
+          <div class="form-group">
+            <label for="category">카테고리</label>
+            <select class="form-control" id="category" name="category">
+              <option value="영화" {% if post.category == '영화' %}selected{% endif %}>영화</option>
+              <option value="드라마" {% if post.category == '드라마' %}selected{% endif %}>드라마</option>
+              <!-- 추가 카테고리 옵션 -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="content">내용</label>
+            <textarea class="form-control" id="content" name="content">{{ post.content }}</textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-primary">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- 로그인 모달 -->
+<div
+class="modal fade"
+id="loginModal"
+tabindex="-1"
+aria-labelledby="loginModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div
+        class="d-flex-column justify-content-center align-items-center w-100 custom-container"
+      >
+        <div class="text-center logo">
+          <img
+            src="{{ url_for('static', filename='NFMB.png') }}"
+            alt="로고"
+            style="height: 50px; width: auto"
+          />
+        </div>
+        <div class="text-center login-modal-title">
+          <h5 class="modal-title" id="loginModalLabel">로그인하기</h5>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="닫기"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- 로그인 폼 -->
+      <form>
+        <div class="form-group">
+          <label for="username">사용자 이름</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="사용자 이름 입력"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="비밀번호 입력"
+          />
+        </div>
+        <div class="twobuttons">
+          <button type="submit" class="btn btn-primary">로그인</button>
+          <button type="submit" class="btn btn-primary">회원가입</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  </body>
+</html>
