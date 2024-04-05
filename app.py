@@ -235,7 +235,7 @@ def write_comment():
 
     if username_comment and contents_comment and post_id:
         new_comment = Comment(username=username_comment,
-                              contents=contents_comment, post_id=post_id)
+                            contents=contents_comment, post_id=post_id)
         db.session.add(new_comment)
         db.session.commit()
         return redirect(url_for('home', post_id=post_id))

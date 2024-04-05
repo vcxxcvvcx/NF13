@@ -100,6 +100,35 @@
             </div>
           </div>
           {% endfor %}
+          <div class="pagination-wrapper text-center">
+            <div class="pagination">
+                {% if posts.has_prev %}
+                    <a href="{{ url_for('index', page=posts.prev_num) }}">이전</a>
+                {% else %}
+                    <span class="disabled">이전</span>
+                    &nbsp; <!-- 공백 추가 -->
+                {% endif %}
+                
+                {% for num in posts.iter_pages() %}
+                    {% if num %}
+                        {% if num != posts.page %}
+                            <a href="{{ url_for('index', page=num) }}">{{ num }}</a>
+                        {% else %}
+                            <span class="current">{{ num }}</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="ellipsis">...</span>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                    &nbsp; <!-- 공백 추가 -->
+                    <a href="{{ url_for('index', page=posts.next_num) }}">다음</a>
+                {% else %}
+                    <span class="disabled">다음</span>
+                {% endif %}
+            </div>
+        </div>
         </div>
           
         </div>
