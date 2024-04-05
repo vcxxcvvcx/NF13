@@ -188,6 +188,7 @@ function increaseLikes(postId) {
 
 // 댓글 자바스크립트
 function openEditModal(username, contents, commentId) {
+  console.log("openEditModal 확인")
   document.getElementById('comment_username').value = username;
   document.getElementById('comment_contents').value = contents;
   document.getElementById('comment_id').value = commentId;
@@ -200,6 +201,7 @@ function deleteComment(formId) {
 }
 
 function submitEditForm() {
+  console.log("form제출")
   const form = document.getElementById('edit-comment-form');
   const commentId = form.querySelector('input[name="comment_id"]').value;
   const newUsername = form.querySelector('input[name="new_username"]').value;
@@ -211,8 +213,9 @@ function submitEditForm() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ newUsername: newUsername, newContents: newContents }),
+    body: JSON.stringify({ new_username: newUsername, new_contents: newContents }),
   })
+  console.log("post request")
     .then(response => {
       // Handle the response as needed
       if (response.ok) {
@@ -227,12 +230,15 @@ function submitEditForm() {
       console.error('Error:', error);
     });
 }
-
-document.querySelectorAll('.edit-btn').forEach(button => {
-  button.addEventListener('click', function () {
-    const username = this.getAttribute('data-username');
-    const contents = this.getAttribute('data-contents');
-    const commentId = this.getAttribute('data-comment-id');
-    openEditModal(username, contents, commentId);
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      console.log("콘솔 확인")
+      const username = this.getAttribute('data-username');
+      const contents = this.getAttribute('data-contents');
+      const commentId = this.getAttribute('data-comment-id');
+      openEditModal(username, contents, commentId);
+      $('#commentModal').modal('show'); // Show the modal
+    });
   });
 });

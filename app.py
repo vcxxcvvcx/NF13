@@ -11,6 +11,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # 데이터베이스 설정
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
     os.path.join(basedir, 'app.db')
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -20,12 +21,34 @@ migrate = Migrate(app, db)
 
 
 class Post(db.Model):
+    __tablename__ = 'post'
     id = db.Column(db.Integer, primary_key=True)  # 게시글 아이디 ->아이디는 자동생성
     title = db.Column(db.String(100), nullable=False)  # 게시글제목
     content = db.Column(db.Text, nullable=False)  # 게시글내용
     author = db.Column(db.String(100), nullable=True)  # 게시글작성자
     category = db.Column(db.String(100), nullable=True)  # 게시글 카테고리
     likes = db.Column(db.Integer, server_default=text('0'))  # 좋아요 추가하엿음
+
+    comment = db.relationship(
+        'Comment', backref=db.backref('post_comments'))
+
+
+class Comment(db.Model):
+    __tablename__ = 'comment'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String, nullable=False)
+    contents = db.Column(db.String, nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey(
+        'post.id'), nullable=False)
+
+    # 데이터 표시
+
+    def __repr__(self):
+        return f'{self.username}: {self.contents}'
+
+
+with app.app_context():
+    db.create_all()
 
 
 @app.route('/')
@@ -112,7 +135,8 @@ def get_posts():  # 모든 게시글을 JSON 형식으로 반환하는 API
 @app.route('/posts/<int:post_id>', methods=['GET'])
 def post_detail(post_id):  # 특정 게시글의 상세 정보를 보여주는 뷰
     post = Post.query.get_or_404(post_id)
-    return render_template('post_detail.html', post=post)
+    comment_list = Comment.query.filter_by(post_id=post_id)
+    return render_template('post_detail.html', post=post, comment_list=comment_list)
 
 
 # 게시글에 아이디추가
@@ -162,6 +186,7 @@ def delete_post(post_id):
 
 @app.route('/posts/<int:post_id>/update', methods=['POST'])
 def update_post(post_id):
+    print(post_id)
     post = Post.query.get_or_404(post_id)
     post.title = request.form['title']
     post.content = request.form['content']
@@ -182,6 +207,99 @@ def like_post():
         return jsonify({'message': 'Likes updated successfully'}), 200
     else:
         return jsonify({'error': 'Post not found'}), 404
+
+
+# 댓글 CRUD
+@app.route("/posts/<int:post_id>")
+def home(post_id):
+    print(post_id)
+    comment_list = Comment.query.filter_by(post_id=post_id)
+    print(comment_list)
+    username = None
+    if comment_list:
+        username = comment_list[0].username
+    else:
+        username = None
+    return render_template("post_detail.html", data=comment_list, username=username, post_id=post_id)
+
+# 댓글 작성
+
+
+@app.route("/create", methods=['POST'])
+def write_comment():
+    # 데이터 받아오기
+    username_comment = request.form.get("username")
+    contents_comment = request.form.get("contents")
+    post_id = request.form.get("post_id")
+    # print(post_id)
+
+    if username_comment and contents_comment and post_id:
+        new_comment = Comment(username=username_comment,
+                              contents=contents_comment, post_id=post_id)
+        db.session.add(new_comment)
+        db.session.commit()
+        return redirect(url_for('home', post_id=post_id))
+    else:
+        return "Error: 작성자 이름 또는 내용이 유효하지 않습니다."
+
+
+@app.route("/<int:comment_id>/edit-modal")
+def edit_comment_modal(comment_id):
+    print(comment_id)
+    comment = Comment.query.get(comment_id)
+    print(comment)
+    if comment:
+        return render_template("edit_comment.html", comment=comment)
+    else:
+        return "Comment not found", 404
+
+
+@app.route("/<int:comment_id>/edit", methods=['GET', 'POST'])
+def edit_comment(comment_id):
+    print(comment_id)
+    comment = Comment.query.get_or_404(comment_id)
+    new_username = request.form.get("new_username")
+    new_contents = request.form.get("new_contents")
+    print(comment)
+    if comment:
+        comment.username = new_username
+        comment.contents = new_contents
+        db.session.commit()
+        return redirect(url_for('home', post_id=comment.post_id))
+
+    # if request.method == 'POST':
+    #     data = request.json
+    #     print(data)
+    #     updated_username = data.get("newUsername")
+    #     updated_contents = data.get("newContents")
+    #     post_id = data.get("post_id")
+    #     # print(updated_contents, updated_username)
+
+    #     comment = Comment.query.get(comment_id)
+    #     # print(comment)
+    #     if comment:
+    #         comment.username = updated_username
+    #         comment.contents = updated_contents
+    #         db.session.commit()
+
+    #     return redirect(url_for('home', post_id=post_id))
+
+    # return redirect(url_for('home', post_id=post_id))
+
+
+@app.route("/<int:comment_id>/delete", methods=['POST'])
+def delete_comment(comment_id):
+    # print("test")
+    # print(comment_id)
+    comment = Comment.query.filter_by(id=1).first()
+    # print(comment.post_id)
+    post_id = comment.post_id
+
+    if comment:
+        # print(comment.id)
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for('home', post_id=post_id))
 
 
 if __name__ == '__main__':

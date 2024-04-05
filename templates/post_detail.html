@@ -121,6 +121,68 @@
       </form>
     </main>
 
+  <!-- 댓글 구역 -->
+  <!-- 댓글 표시 -->
+  <div class="comment_box">
+    {% for comment in comment_list %}
+    <div class="comments">
+      <div>{{ comment.username }}</div>
+      <div>{{ comment.contents }}</div>
+      <button type="button" data-toggle="modal" data-target="#commentModal">수정</button>
+      <form id="delete-comment-form-{{ comment.id }}" action="{{ url_for('delete_comment', comment_id = comment.id) }}"
+        method="POST">
+        <input type="hidden" name="contents" value="{{ comment.contents }}">
+        <button type="button" onclick="deleteComment('delete-comment-form-{{ comment.id }}')">삭제</button>
+      </form>
+    </div>
+    <!-- 댓글 수정 모달창 -->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="edit-comment-form" method="post" action="{ url_for('edit_comment', comment_id = comment.id)}">
+              <input type="hidden" name="comment_id" value="{{ comment.id }}">
+              <div class="mb-3">
+                <label for="comment_username" class="col-form-label">작성자:</label>
+                <input type="text" class="form-control" id="comment_username" name="new_username"
+                  value="{{ comment.username }}">
+              </div>
+              <div class="mb-3">
+                <label for="comment_contents" class="col-form-label">내용:</label>
+                <input type="text" class="form-control" id="comment_contents" name="new_contents"
+                  value=" {{ comment.contents}}">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger" onclick="submitEditForm()">제출</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <!-- 댓글 작성 -->
+  <div class="write_comment">
+    <form action="{{url_for('write_comment')}}" method="POST">
+      <div class="form-group">
+        <label for="authorInput">작성자</label>
+        <input type="text" class="form-control" id="authorInput" placeholder="작성자 이름" name="username">
+      </div>
+      <div class="form-group">
+        <label for="contentTextarea">내용</label>
+        <textarea class="form-control" id="contentTextarea" rows="2" placeholder="내용 입력" name="contents"></textarea>
+      </div>
+      <input type="hidden" name="post_id" value="{{ post.id }}">
+      <button type="submit">제출</button>
+    </form>
+  </div>
+
     <!-- 푸터 -->
     <footer id="footer">
       <div class="container py-4">
