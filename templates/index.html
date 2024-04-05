@@ -1,5 +1,4 @@
-<!-- index.html -->
-
+<!--index.html-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,10 +13,6 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- jQuery (Bootstrap의 JavaScript 플러그인을 위해 필요) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <!-- Bootstrap Bundle JS (Popper.js 포함) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <link
       rel="stylesheet"
@@ -58,7 +53,6 @@
         </div>
       </nav>
     </header>
-
     <main class="container mt-4">
       
         <!-- 주 컨텐츠 -->
@@ -106,282 +100,137 @@
             </div>
           </div>
           {% endfor %}
-          <div class="pagination-wrapper text-center">
-            <div class="pagination">
-                {% if posts.has_prev %}
-                    <a href="{{ url_for('index', page=posts.prev_num) }}">이전</a>
-                {% else %}
-                    <span class="disabled">이전</span>
-                    &nbsp; <!-- 공백 추가 -->
-                {% endif %}
-                
-                {% for num in posts.iter_pages() %}
-                    {% if num %}
-                        {% if num != posts.page %}
-                            <a href="{{ url_for('index', page=num) }}">{{ num }}</a>
-                        {% else %}
-                            <span class="current">{{ num }}</span>
-                        {% endif %}
-                    {% else %}
-                        <span class="ellipsis">...</span>
-                    {% endif %}
-                {% endfor %}
-                
-                {% if posts.has_next %}
-                    &nbsp; <!-- 공백 추가 -->
-                    <a href="{{ url_for('index', page=posts.next_num) }}">다음</a>
-                {% else %}
-                    <span class="disabled">다음</span>
-                {% endif %}
-            </div>
         </div>
-        </div>
-        </div>
-          <!-- 카드 몇개할지 반복 -->
-          <!-- <div class="card mb-3" style="width: 100%">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img
-                  src="data:image/png;base64,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"
-                  class="card-img"
-                  alt="영화 이미지"
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">영화 제목</h5>
-                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
-                  <p class="card-text">
-                    <small class="text-muted">작성자</small>
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">좋아요 0개</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card mb-3" style="width: 100%">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img
-                  src="data:image/png;base64,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"
-                  class="card-img"
-                  alt="영화 이미지"
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">영화 제목</h5>
-                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
-                  <p class="card-text">
-                    <small class="text-muted">작성자</small>
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">좋아요 0개</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card mb-3" style="width: 100%">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img
-                  src="data:image/png;base64,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"
-                  class="card-img"
-                  alt="영화 이미지"
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">영화 제목</h5>
-                  <p class="card-text">이곳에 영화 설명이 들어갑니다.</p>
-                  <p class="card-text">
-                    <small class="text-muted">작성자</small>
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">좋아요 0개</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>  -->
+          
         </div>
         
 
         <!-- 사이드바 '넷플릭스 영화 TOP 10' 부분 -->
         <div class="col-md-4 fixed-sidebar">
-          <!-- 카테고리 -->
-          <div class="card">
-            <div class="card-header">카테고리</div>
-            <ul class="list-group list-group-flush">
-              <a href="{{ url_for('index') }}" class="list-group-item list-group-item-action">전체</a> <!-- 전체 카테고리 -->
-              <a href="{{ url_for('category', category='영화') }}" class="list-group-item list-group-item-action">영화</a>
-              <a href="{{ url_for('category', category='드라마') }}" class="list-group-item list-group-item-action">드라마</a>
-              <!-- 다른 카테고리 항목들 추가 -->
-            </ul>
-          </div>
-          <!-- 넷플릭스 영화 TOP 10 -->
-          <!--<div class="card">
-            <div class="card-header">넷플릭스 영화 TOP 10</div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">영화1</li>
-              <li class="list-group-item">영화2</li>
-              <li class="list-group-item">영화3</li>
-              <li class="list-group-item">영화4</li>
-              <li class="list-group-item">영화5</li>
-              <li class="list-group-item">영화6</li>
-              <li class="list-group-item">영화7</li>
-              <li class="list-group-item">영화8</li>
-              <li class="list-group-item">영화9</li>
-              <li class="list-group-item">영화10</li>
-            </ul>
-          </div>
-        </div>-->
-
-<!-- 넷플릭스 영화 TOP 10 하이퍼링크만 달안ㅆ음ㄴ -->
-<div class="card">
-  <div class="card-header">넷플릭스 순위 TOP 10</div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81707950" target="_blank">1위: 눈물의여왕</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81587446" target="_blank">2위: 피지컬: 100</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81024821" target="_blank">3위: 삼체</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81091393" target="_blank">4위: 귀멸의칼날</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81582269" target="_blank">5위: 닭강정</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81768970" target="_blank">6위: 미녀와 순정남</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81749761" target="_blank">7위: 나혼자만 레벨업</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81341795" target="_blank">8위: 테스터멘트: 모세 이야기</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81642998" target="_blank">9위: 전생했더니검이었습니다</a></li>
-    <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81747048" target="_blank">10위: 아이 러브 유</a></li>
-  </ul>
-</div>
-
-        </div>
-        <!-- 글쓰기 버튼 -->
-        <div class="wbutton">
-          <a
-            href="{{ url_for('write') }}"
-            class="btn btn-primary btn-block"
-            id="writeButton"
-          >
-            글쓰기
-          </a>
-        </div>
-      </div>
-    </main>
-
-    <footer id="footer">
-      <div class="container py-4">
-        <div class="copyright">
-          © Copyright <strong><span>team13</span></strong
-          >. All Rights Reserved
-          <div>일찍끝내조</div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- 로그인 모달 -->
-    <div
-      class="modal fade"
-      id="loginModal"
-      tabindex="-1"
-      aria-labelledby="loginModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <div
-              class="d-flex-column justify-content-center align-items-center w-100 custom-container"
-            >
-              <div class="text-center logo">
-                <img
-                  src="{{ url_for('static', filename='NFMB.png') }}"
-                  alt="로고"
-                  style="height: 50px; width: auto"
-                />
-              </div>
-              <div class="text-center login-modal-title">
-                <h5 class="modal-title" id="loginModalLabel">로그인하기</h5>
-              </div>
+            <!-- 카테고리 -->
+            <div class="card">
+              <div class="card-header">카테고리</div>
+              <ul class="list-group list-group-flush">
+                <a href="{{ url_for('index') }}" class="list-group-item list-group-item-action">전체</a> <!-- 전체 카테고리 -->
+                <a href="{{ url_for('category', category='영화') }}" class="list-group-item list-group-item-action">영화</a>
+                <a href="{{ url_for('category', category='드라마') }}" class="list-group-item list-group-item-action">드라마</a>
+                <!-- 다른 카테고리 항목들 추가 -->
+              </ul>
             </div>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="닫기"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <!-- 로그인 폼 -->
-            <form>
-              <div class="form-group">
-                <label for="username">사용자 이름</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  placeholder="사용자 이름 입력"
-                />
-              </div>
-              <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  placeholder="비밀번호 입력"
-                />
-              </div>
-              <div class="twobuttons">
-                <button type="submit" class="btn btn-primary">로그인</button>
-                <button type="submit" class="btn btn-primary">회원가입</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 수정 모달 -->
-<!--<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">게시글 수정</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="editPostForm">
-        <div class="modal-body">-->
-          <!-- 수정할 내용 입력 폼 -->
-          <!--<div class="form-group">
-            <label for="editTitle">제목</label>
-            <input type="text" class="form-control" id="editTitle" name="title">
-          </div>
-          <div class="form-group">
-            <label for="editContent">내용</label>
-            <textarea class="form-control" id="editContent" name="content"></textarea>
-          </div> -->
-          <!-- 기타 필드 추가 가능 -->
-        <!--</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-          <button type="submit" class="btn btn-primary">저장</button>
-        </div>
-      </form>
-    </div>
+  
+          <!-- 넷플릭스 영화 TOP 10 -->
+          <!-- 넷플릭스 영화 TOP 10 -->
+<div class="card">
+    <div class="card-header">넷플릭스 순위 TOP 10</div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81707950" target="_blank">1위: 눈물의여왕</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81587446" target="_blank">2위: 피지컬: 100</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81024821" target="_blank">3위: 삼체</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81091393" target="_blank">4위: 귀멸의칼날</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81582269" target="_blank">5위: 닭강정</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81768970" target="_blank">6위: 미녀와 순정남</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81749761" target="_blank">7위: 나혼자만 레벨업</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81341795" target="_blank">8위: 테스터멘트: 모세 이야기</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81642998" target="_blank">9위: 전생했더니검이었습니다</a></li>
+      <li class="list-group-item"><a href="https://www.netflix.com/kr/title/81747048" target="_blank">10위: 아이 러브 유</a></li>
+    </ul>
   </div>
-</div> -->
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  </body>
-</html>
+  
+          </div>
+          <!-- 글쓰기 버튼 -->
+          <div class="wbutton">
+            <a
+              href="{{ url_for('write') }}"
+              class="btn btn-primary btn-block"
+              id="writeButton"
+            >
+              글쓰기
+            </a>
+          </div>
+        </div>
+      </main>
+  
+      <footer id="footer">
+        <div class="container py-4">
+          <div class="copyright">
+            © Copyright <strong><span>team13</span></strong
+            >. All Rights Reserved
+            <div>일찍끝내조</div>
+          </div>
+        </div>
+      </footer>
+  
+      <!-- 로그인 모달 -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div
+                class="d-flex-column justify-content-center align-items-center w-100 custom-container"
+              >
+                <div class="text-center logo">
+                  <img
+                    src="{{ url_for('static', filename='NFMB.png') }}"
+                    alt="로고"
+                    style="height: 50px; width: auto"
+                  />
+                </div>
+                <div class="text-center login-modal-title">
+                  <h5 class="modal-title" id="loginModalLabel">로그인하기</h5>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="닫기"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- 로그인 폼 -->
+              <form>
+                <div class="form-group">
+                  <label for="username">사용자 이름</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    placeholder="사용자 이름 입력"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password">비밀번호</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="비밀번호 입력"
+                  />
+                </div>
+                <div class="twobuttons">
+                  <button type="submit" class="btn btn-primary">로그인</button>
+                  <button type="submit" class="btn btn-primary">회원가입</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+  
+  
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </body>
+  </html>
+  
